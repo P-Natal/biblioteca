@@ -1,0 +1,21 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:9.6-alpine
+    hostname: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=bibliotecadb
+    container_name: postgres_biblioteca
+
+  tomcat:
+    image: tomcat:8.5.35
+    container_name: tomcat
+    volumes:
+      - ./target/biblioteca-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/ROOT.war
+      - ./target/biblioteca-1.0-SNAPSHOT:/usr/local/tomcat/webapps/ROOT
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
