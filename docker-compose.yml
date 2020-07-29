@@ -5,6 +5,8 @@ services:
     hostname: postgres
     ports:
       - "5432:5432"
+    expose:
+      - "5432"
     environment:
       - POSTGRES_DB=bibliotecadb
     container_name: postgres_biblioteca
