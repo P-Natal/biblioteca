@@ -23,9 +23,15 @@
         <br>
 
         <fieldset> <legend>Remoção de autores</legend>
-            <form>
-                <label>ID do Autor</label> <input type="number" />
+            <form  action="autor" method="delete">
+                <label>ID do Autor</label> <input type="number" name="id" />
                 <button>Remover</button>
+            </form>
+        </fieldset>
+
+        <fieldset> <legend>Autores cadastrados</legend>
+            <form action="autor" method="get">
+                <button>Buscar</button>
             </form>
         </fieldset>
 

@@ -49,6 +49,32 @@ public class AutorService extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html");
+        PrintWriter output = response.getWriter();
+        Long id = Long.valueOf(request.getParameter("id"));
+        try{
+            deletaAutor(id);
+            output.println("<h3>Autor removido com sucesso<h3>");
+        }
+        catch (Exception e){
+            output.println("<h3>Falha ao remover autor da base<h3>");
+        }
+        output.println("<fieldset>Autores cadastrados<fieldset>");
+        for (Autor autor : buscaTodosAutores()){
+            output.println("<p>" + autor.toString() + "</p>");
+        }
+    }
+
+    private void deletaAutor(Long id) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        Autor autor = em.find(Autor.class, id);
+        em.remove(autor);
+    }
+
     private Autor persisteAutor(HttpServletRequest request){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
         EntityManager em = emf.createEntityManager();
