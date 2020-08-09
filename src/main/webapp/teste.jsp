@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -7,8 +7,11 @@
     </head>
 
     <body>
+        <%@ page import="com.natal.biblioteca.infrastructure.entities.Autor" %>
+
+
         <fieldset> <legend>Cadastro de autores</legend>
-            <form action="autorEntity" method="post">
+            <form action="autor" method="post">
                 <label>Primeiro Nome</label> <input type="text" name="primNome"/> <br>
                 <label>Nome do meio</label> <input type="text" name="nomeMeio"/> <br>
                 <label>Último nome</label> <input type="text" name="ultNome"/> <br>
@@ -23,16 +26,23 @@
         <br>
 
         <fieldset> <legend>Remoção de autores</legend>
-            <form  action="autorEntity" method="delete">
-                <label>ID do Autor</label> <input type="number" name="id" />
+            <form action="autor" method="delete">
+                <label>ID do Autor</label> <input type="number" />
                 <button>Remover</button>
             </form>
         </fieldset>
 
         <fieldset> <legend>Autores cadastrados</legend>
-            <form action="autorEntity" method="get">
-                <button>Buscar</button>
-            </form>
+        <%
+            for(Autor autor : ${autoresCadastrados}){
+        %>
+             <form>
+                 <label>ID do Autor</label> <%autor.getId()%>
+                 <label>Nome do Autor</label> <%autor.getPrimeiroNome()+autor.getNomeDoMeio()+autor.getUltimoNome()%>
+             </form>
+        <%
+            }
+        %>
         </fieldset>
 
         <br>

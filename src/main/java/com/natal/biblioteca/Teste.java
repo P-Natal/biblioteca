@@ -1,6 +1,6 @@
 package com.natal.biblioteca;
 
-import com.natal.biblioteca.infrastructure.entities.Autor;
+import com.natal.biblioteca.infrastructure.entities.AutorEntity;
 
 import javax.persistence.*;
 import java.sql.SQLException;
@@ -25,7 +25,7 @@ public class Teste {
 
         log.info("Criando um Autor...");
 
-        Autor autor = new Autor(
+        AutorEntity autorEntity = new AutorEntity(
                 "João",
                 "da Silva",
                 "Júnior",
@@ -34,7 +34,7 @@ public class Teste {
                 "Braza"
         );
 
-        Autor autor2 = new Autor(
+        AutorEntity autorEntity2 = new AutorEntity(
                 "João",
                 "da Silva",
                 "Júnior",
@@ -47,16 +47,16 @@ public class Teste {
 
         et.begin();
 
-        em.persist(autor);
+        em.persist(autorEntity);
         log.info("Salvando Autor 2");
-        em.persist(autor2);
+        em.persist(autorEntity2);
         log.info("Verificando se foi persistido...");
         et.commit();
 
         Query query = em.createNamedQuery("buscaTodos");
-        List<Autor> autores = query.getResultList();
+        List<AutorEntity> autores = query.getResultList();
 
-        for (Autor aut : autores){
+        for (AutorEntity aut : autores){
             log.info("Autor: " + aut.toString());
         }
     }

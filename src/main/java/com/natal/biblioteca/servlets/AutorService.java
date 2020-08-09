@@ -1,6 +1,6 @@
 package com.natal.biblioteca.servlets;
 
-import com.natal.biblioteca.infrastructure.entities.Autor;
+import com.natal.biblioteca.infrastructure.entities.AutorEntity;
 
 import javax.persistence.*;
 import javax.servlet.RequestDispatcher;
@@ -25,11 +25,11 @@ public class AutorService extends HttpServlet {
 
             persisteAutor(request);
 
-            List<Autor> autores = buscaTodosAutores();
+            List<AutorEntity> autores = buscaTodosAutores();
 
             output.println("<fieldset> <legend>Lista de autores cadastrados</legend>");
 
-            for (Autor aut : autores){
+            for (AutorEntity aut : autores){
                     output.println("<h2>" + aut.toString() + "</h2>");
             }
 
@@ -44,8 +44,8 @@ public class AutorService extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter output = response.getWriter();
         output.println("<fieldset>Autores cadastrados<fieldset>");
-        for (Autor autor : buscaTodosAutores()){
-            output.println("<h3>" + autor.toString() + "</h3>");
+        for (AutorEntity autorEntity : buscaTodosAutores()){
+            output.println("<h3>" + autorEntity.toString() + "</h3>");
         }
     }
 
@@ -62,8 +62,8 @@ public class AutorService extends HttpServlet {
             output.println("<h3>Falha ao remover autor da base<h3>");
         }
         output.println("<fieldset>Autores cadastrados<fieldset>");
-        for (Autor autor : buscaTodosAutores()){
-            output.println("<p>" + autor.toString() + "</p>");
+        for (AutorEntity autorEntity : buscaTodosAutores()){
+            output.println("<p>" + autorEntity.toString() + "</p>");
         }
     }
 
@@ -71,16 +71,16 @@ public class AutorService extends HttpServlet {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
-        Autor autor = em.find(Autor.class, id);
-        em.remove(autor);
+        AutorEntity autorEntity = em.find(AutorEntity.class, id);
+        em.remove(autorEntity);
     }
 
-    private Autor persisteAutor(HttpServletRequest request){
+    private AutorEntity persisteAutor(HttpServletRequest request){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
 
-        Autor autor = new Autor(
+        AutorEntity autorEntity = new AutorEntity(
                 request.getParameter("primNome"),
                 request.getParameter("nomeMeio"),
                 request.getParameter("ultNome"),
@@ -89,19 +89,19 @@ public class AutorService extends HttpServlet {
                 request.getParameter("pais")
         );
         et.begin();
-        em.persist(autor);
+        em.persist(autorEntity);
         et.commit();
-        return autor;
+        return autorEntity;
     }
 
-    private List<Autor> buscaTodosAutores(){
+    private List<AutorEntity> buscaTodosAutores(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
         EntityManager em = emf.createEntityManager();
         Query query = em.createNamedQuery("buscaTodos");
         return query.getResultList();
     }
 
-    private List<Autor> buscarAutorPorNome(String primeiroNome) {
+    private List<AutorEntity> buscarAutorPorNome(String primeiroNome) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
         EntityManager em = emf.createEntityManager();
         Query query = em.createNamedQuery("buscaAutorPorNome");
@@ -109,7 +109,7 @@ public class AutorService extends HttpServlet {
         return query.getResultList();
     }
 
-    private List<Autor> buscarAutorPorAfiliacao(String afiliacao) {
+    private List<AutorEntity> buscarAutorPorAfiliacao(String afiliacao) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
         EntityManager em = emf.createEntityManager();
         Query query = em.createNamedQuery("buscaAutorPorAfiliacao");
@@ -117,7 +117,7 @@ public class AutorService extends HttpServlet {
         return query.getResultList();
     }
 
-    private void showResultInPage(HttpServletRequest request, HttpServletResponse response, List<Autor> autores) throws ServletException, IOException {
+    private void showResultInPage(HttpServletRequest request, HttpServletResponse response, List<AutorEntity> autores) throws ServletException, IOException {
         request.setAttribute("autores", autores);
         RequestDispatcher rd = request.getRequestDispatcher("/index.html");
         rd.include(request, response);

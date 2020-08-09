@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = "buscaTodos", query = "select a from Autor a")
-public class Autor {
+@NamedQuery(name = "buscaTodos", query = "select a from AutorEntity a")
+public class AutorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -30,12 +30,12 @@ public class Autor {
     private String pais;
 
     @OneToMany(mappedBy = "autor")
-    private List<PublicacaoAutor> publicacaoAutor;
+    private List<PublicacaoAutorEntity> publicacaoAutorEntity;
 
-    public Autor() {
+    public AutorEntity() {
     }
 
-    public Autor(String primeiro_nome, String nome_do_meio, String ultimo_nome, String afiliacao, String email, String pais) {
+    public AutorEntity(String primeiro_nome, String nome_do_meio, String ultimo_nome, String afiliacao, String email, String pais) {
         this.primeiro_nome = primeiro_nome;
         this.nome_do_meio = nome_do_meio;
         this.ultimo_nome = ultimo_nome;
@@ -72,8 +72,8 @@ public class Autor {
         return pais;
     }
 
-    public List<PublicacaoAutor> getPublicacaoAutor() {
-        return publicacaoAutor;
+    public List<PublicacaoAutorEntity> getPublicacaoAutorEntity() {
+        return publicacaoAutorEntity;
     }
 
     @Override

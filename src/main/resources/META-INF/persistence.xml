@@ -7,15 +7,15 @@
     <persistence-unit name="bibliotecadb" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>com.natal.biblioteca.infrastructure.entities.Autor</class>
-        <class>com.natal.biblioteca.infrastructure.entities.Livro</class>
-        <class>com.natal.biblioteca.infrastructure.entities.Publicacao</class>
-        <class>com.natal.biblioteca.infrastructure.entities.Editora</class>
-        <class>com.natal.biblioteca.infrastructure.entities.Periodico</class>
-        <class>com.natal.biblioteca.infrastructure.entities.Conferencia</class>
-        <class>com.natal.biblioteca.infrastructure.entities.ArtigoDeConferencia</class>
-        <class>com.natal.biblioteca.infrastructure.entities.Capitulo</class>
-        <class>com.natal.biblioteca.infrastructure.entities.ArtigoDePeriodico</class>
+        <class>com.natal.biblioteca.infrastructure.entities.AutorEntity</class>
+        <class>com.natal.biblioteca.infrastructure.entities.LivroEntity</class>
+        <class>com.natal.biblioteca.infrastructure.entities.PublicacaoEntity</class>
+        <class>com.natal.biblioteca.infrastructure.entities.EditoraEntity</class>
+        <class>com.natal.biblioteca.infrastructure.entities.PeriodicoEntity</class>
+        <class>com.natal.biblioteca.infrastructure.entities.ConferenciaEntity</class>
+        <class>com.natal.biblioteca.infrastructure.entities.ArtigoDeConferenciaEntity</class>
+        <class>com.natal.biblioteca.infrastructure.entities.CapituloEntity</class>
+        <class>com.natal.biblioteca.infrastructure.entities.ArtigoDePeriodicoEntity</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
