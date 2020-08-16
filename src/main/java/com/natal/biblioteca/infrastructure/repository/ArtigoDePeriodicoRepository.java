@@ -19,7 +19,7 @@ public class ArtigoDePeriodicoRepository {
 
     @SuppressWarnings("unchecked")
     public List<ArtigoDePeriodicoEntity> buscaTodos() {
-        return this.entityManager.createNamedQuery("buscaTodos").getResultList();
+        return this.entityManager.createNamedQuery("buscaTodosArtigoDePeriodico").getResultList();
     }
 
 

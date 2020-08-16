@@ -31,9 +31,9 @@ public class PeriodicoController {
                     new Periodico(
                             entity.getId(),
                             new Editora(
-                                    entity.getEditoraEntity().getId(),
-                                    entity.getEditoraEntity().getNome(),
-                                    entity.getEditoraEntity().getPais()
+                                    entity.getEditora().getId(),
+                                    entity.getEditora().getNome(),
+                                    entity.getEditora().getPais()
                             ),
                             entity.getTitulo(),
                             entity.getAcronimo(),
@@ -54,9 +54,9 @@ public class PeriodicoController {
         return new Periodico(
                 entity.getId(),
                 new Editora(
-                        entity.getEditoraEntity().getId(),
-                        entity.getEditoraEntity().getNome(),
-                        entity.getEditoraEntity().getPais()
+                        entity.getEditora().getId(),
+                        entity.getEditora().getNome(),
+                        entity.getEditora().getPais()
                 ),
                 entity.getTitulo(),
                 entity.getAcronimo(),

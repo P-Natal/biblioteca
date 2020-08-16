@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = "buscaTodos", query = "select a from AutorEntity a")
+@NamedQuery(name = "buscaTodosAutor", query = "select a from AutorEntity a")
 public class AutorEntity {
 
     @Id
@@ -29,7 +29,7 @@ public class AutorEntity {
     @Column(name = "pais")
     private String pais;
 
-    @OneToMany(mappedBy = "autor")
+    @OneToMany(mappedBy = "autor", fetch = FetchType.LAZY)
     private List<PublicacaoAutorEntity> publicacaoAutorEntity;
 
     public AutorEntity() {

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = "buscaTodos", query = "select P from PublicacaoEntity p")
+@NamedQuery(name = "buscaTodosPublicacao", query = "select p from PublicacaoEntity p")
 public class PublicacaoEntity {
 
     @Id

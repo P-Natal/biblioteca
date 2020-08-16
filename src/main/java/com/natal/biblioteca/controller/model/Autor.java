@@ -31,6 +31,15 @@ public class Autor {
         this.pais = pais;
     }
 
+    public Autor(String primeiro_nome, String nome_do_meio, String ultimo_nome, String afiliacao, String email, String pais) {
+        this.primeiro_nome = primeiro_nome;
+        this.nome_do_meio = nome_do_meio;
+        this.ultimo_nome = ultimo_nome;
+        this.afiliacao = afiliacao;
+        this.email = email;
+        this.pais = pais;
+    }
+
     public Long getId() {
         return id;
     }

@@ -3,7 +3,7 @@ package com.natal.biblioteca.infrastructure.entities;
 import javax.persistence.*;
 
 @Entity
-@NamedQuery(name = "buscaTodos", query = "select pa from PublicacaoAutorEntity pa")
+@NamedQuery(name = "buscaTodosPublicacaoAutor", query = "select pa from PublicacaoAutorEntity pa")
 public class PublicacaoAutorEntity {
     
     @Id
@@ -11,14 +11,14 @@ public class PublicacaoAutorEntity {
     private Long id;
 
     @ManyToOne
-    private AutorEntity autorEntity;
+    private AutorEntity autor;
 
     @ManyToOne
-    private PublicacaoEntity publicacaoEntity;
+    private PublicacaoEntity publicacao;
 
     public PublicacaoAutorEntity(AutorEntity autorEntity, PublicacaoEntity publicacaoEntity) {
-        this.autorEntity = autorEntity;
-        this.publicacaoEntity = publicacaoEntity;
+        this.autor = autorEntity;
+        this.publicacao = publicacaoEntity;
     }
 
     public Long getId() {
@@ -29,19 +29,19 @@ public class PublicacaoAutorEntity {
         this.id = id;
     }
 
-    public AutorEntity getAutorEntity() {
-        return autorEntity;
+    public AutorEntity getAutor() {
+        return autor;
     }
 
-    public void setAutorEntity(AutorEntity autorEntity) {
-        this.autorEntity = autorEntity;
+    public void setAutor(AutorEntity autor) {
+        this.autor = autor;
     }
 
-    public PublicacaoEntity getPublicacaoEntity() {
-        return publicacaoEntity;
+    public PublicacaoEntity getPublicacao() {
+        return publicacao;
     }
 
-    public void setPublicacaoEntity(PublicacaoEntity publicacaoEntity) {
-        this.publicacaoEntity = publicacaoEntity;
+    public void setPublicacao(PublicacaoEntity publicacao) {
+        this.publicacao = publicacao;
     }
 }

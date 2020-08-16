@@ -31,9 +31,9 @@ public class LivroController {
                     new Livro(
                             entity.getId(),
                             new Editora(
-                                    entity.getEditoraEntity().getId(),
-                                    entity.getEditoraEntity().getNome(),
-                                    entity.getEditoraEntity().getPais()
+                                    entity.getEditora().getId(),
+                                    entity.getEditora().getNome(),
+                                    entity.getEditora().getPais()
                             ),
                             entity.getIsbn()
                     )
@@ -49,12 +49,12 @@ public class LivroController {
     public Livro buscaLivro(Long id){
         LivroEntity livroEntity = repository.getLivro(id);
 
-        EditoraEntity editoraEntity = editoraRepository.getEditora(livroEntity.getEditoraEntity().getId());
+        EditoraEntity editoraEntity = editoraRepository.getEditora(livroEntity.getEditora().getId());
 
         if (editoraEntity == null) {
             editoraEntity = new EditoraEntity(
-                    livroEntity.getEditoraEntity().getNome(),
-                    livroEntity.getEditoraEntity().getPais()
+                    livroEntity.getEditora().getNome(),
+                    livroEntity.getEditora().getPais()
             );
         }
 

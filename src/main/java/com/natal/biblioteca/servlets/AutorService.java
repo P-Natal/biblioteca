@@ -97,7 +97,7 @@ public class AutorService extends HttpServlet {
     private List<AutorEntity> buscaTodosAutores(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
         EntityManager em = emf.createEntityManager();
-        Query query = em.createNamedQuery("buscaTodos");
+        Query query = em.createNamedQuery("buscaTodosAutor");
         return query.getResultList();
     }
 

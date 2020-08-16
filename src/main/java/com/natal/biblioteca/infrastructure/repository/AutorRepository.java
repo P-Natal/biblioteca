@@ -19,7 +19,7 @@ public class AutorRepository {
 
     @SuppressWarnings("unchecked")
     public List<AutorEntity> buscaTodos() {
-        return this.entityManager.createNamedQuery("buscaTodos").getResultList();
+        return this.entityManager.createNamedQuery("buscaTodosAutor").getResultList();
     }
 
 

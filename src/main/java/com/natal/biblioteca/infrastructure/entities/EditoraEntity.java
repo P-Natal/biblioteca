@@ -3,7 +3,7 @@ package com.natal.biblioteca.infrastructure.entities;
 import javax.persistence.*;
 
 @Entity
-@NamedQuery(name = "buscaTodos", query = "select e from EditoraEntity e")
+@NamedQuery(name = "buscaTodosEditora", query = "select e from EditoraEntity e")
 public class EditoraEntity {
 
     @Id

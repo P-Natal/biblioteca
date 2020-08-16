@@ -5,7 +5,7 @@ import com.natal.biblioteca.infrastructure.entities.auxiliar.TipoArtigo;
 import javax.persistence.*;
 
 @Entity
-@NamedQuery(name = "buscaTodos", query = "select art from ArtigoDeConferenciaEntity art")
+@NamedQuery(name = "buscaTodosArtigoDeConferencia", query = "select art from ArtigoDeConferenciaEntity art")
 public class ArtigoDeConferenciaEntity {
 
     @Id
@@ -13,7 +13,7 @@ public class ArtigoDeConferenciaEntity {
     private Long Id;
 
     @ManyToOne(targetEntity = ConferenciaEntity.class)
-    private ConferenciaEntity conferenciaEntity;
+    private ConferenciaEntity conferencia;
 
     @Column(name = "tipo")
     @Enumerated(EnumType.STRING)
@@ -21,7 +21,7 @@ public class ArtigoDeConferenciaEntity {
 
     public ArtigoDeConferenciaEntity(Long id, ConferenciaEntity conferenciaEntity, TipoArtigo tipo) {
         Id = id;
-        this.conferenciaEntity = conferenciaEntity;
+        this.conferencia = conferenciaEntity;
         this.tipo = tipo;
     }
 
@@ -33,12 +33,12 @@ public class ArtigoDeConferenciaEntity {
         Id = id;
     }
 
-    public ConferenciaEntity getConferenciaEntity() {
-        return conferenciaEntity;
+    public ConferenciaEntity getConferencia() {
+        return conferencia;
     }
 
-    public void setConferenciaEntity(ConferenciaEntity conferenciaEntity) {
-        this.conferenciaEntity = conferenciaEntity;
+    public void setConferencia(ConferenciaEntity conferencia) {
+        this.conferencia = conferencia;
     }
 
     public TipoArtigo getTipo() {

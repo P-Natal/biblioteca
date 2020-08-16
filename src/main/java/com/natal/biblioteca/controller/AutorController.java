@@ -8,14 +8,14 @@ import javax.ws.rs.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/autor-controller")
+@Path("/autor")
 public class AutorController {
 
     private AutorRepository repository = new AutorRepository();
 
     @GET
     @Produces("application/json; charset=UTF-8")
-    @Path("/busca-autores")
+    @Path("/busca-todos")
     public List<Autor> todosAutores(){
 
         List<Autor> autores =  new ArrayList<Autor>();
@@ -71,9 +71,9 @@ public class AutorController {
     @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
     @Path("/deletar")
-    public String deletar(Autor autor){
+    public String deletar(Long id){
         try {
-            repository.excluir(autor.getId());
+            repository.excluir(id);
             return "Autor removido com sucesso!";
         } catch (Exception e) {
             return "Erro ao remover o registro " + e.getMessage();

@@ -3,7 +3,7 @@ package com.natal.biblioteca.infrastructure.entities;
 import javax.persistence.*;
 
 @Entity
-@NamedQuery(name = "buscaTodos", query = "select cap from CapituloEntity cap")
+@NamedQuery(name = "buscaTodosCapitulos", query = "select cap from CapituloEntity cap")
 public class CapituloEntity {
 
     @Id
@@ -11,10 +11,10 @@ public class CapituloEntity {
     private Long id;
 
     @ManyToOne(targetEntity = LivroEntity.class)
-    private LivroEntity livroEntity;
+    private LivroEntity livro;
 
     public CapituloEntity(LivroEntity livroEntity) {
-        this.livroEntity = livroEntity;
+        this.livro = livroEntity;
     }
 
     public Long getId() {
@@ -25,11 +25,11 @@ public class CapituloEntity {
         this.id = id;
     }
 
-    public LivroEntity getLivroEntity() {
-        return livroEntity;
+    public LivroEntity getLivro() {
+        return livro;
     }
 
-    public void setLivroEntity(LivroEntity livroEntity) {
-        this.livroEntity = livroEntity;
+    public void setLivro(LivroEntity livro) {
+        this.livro = livro;
     }
 }

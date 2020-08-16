@@ -3,7 +3,7 @@ package com.natal.biblioteca.infrastructure.entities;
 import javax.persistence.*;
 
 @Entity
-@NamedQuery(name = "buscaTodos", query = "select art from ArtigoDePeriodicoEntity art")
+@NamedQuery(name = "buscaTodosArtigoDePeriodico", query = "select art from ArtigoDePeriodicoEntity art")
 public class ArtigoDePeriodicoEntity {
 
     @Id
@@ -11,7 +11,7 @@ public class ArtigoDePeriodicoEntity {
     private Long id;
 
     @ManyToOne
-    private PeriodicoEntity periodicoEntity;
+    private PeriodicoEntity periodico;
 
     @Column(name = "edicao")
     private int edicao;
@@ -20,7 +20,7 @@ public class ArtigoDePeriodicoEntity {
     private int volume;
 
     public ArtigoDePeriodicoEntity(PeriodicoEntity periodicoEntity, int edicao, int volume) {
-        this.periodicoEntity = periodicoEntity;
+        this.periodico = periodicoEntity;
         this.edicao = edicao;
         this.volume = volume;
     }
@@ -33,12 +33,12 @@ public class ArtigoDePeriodicoEntity {
         this.id = id;
     }
 
-    public PeriodicoEntity getPeriodicoEntity() {
-        return periodicoEntity;
+    public PeriodicoEntity getPeriodico() {
+        return periodico;
     }
 
-    public void setPeriodicoEntity(PeriodicoEntity periodicoEntity) {
-        this.periodicoEntity = periodicoEntity;
+    public void setPeriodico(PeriodicoEntity periodico) {
+        this.periodico = periodico;
     }
 
     public int getEdicao() {

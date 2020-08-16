@@ -31,13 +31,13 @@ public class CapituloController {
                     new Capitulo(
                             entity.getId(),
                             new Livro(
-                                    entity.getLivroEntity().getId(),
+                                    entity.getLivro().getId(),
                                     new Editora(
-                                            entity.getLivroEntity().getEditoraEntity().getId(),
-                                            entity.getLivroEntity().getEditoraEntity().getNome(),
-                                            entity.getLivroEntity().getEditoraEntity().getPais()
+                                            entity.getLivro().getEditora().getId(),
+                                            entity.getLivro().getEditora().getNome(),
+                                            entity.getLivro().getEditora().getPais()
                                     ),
-                                    entity.getLivroEntity().getIsbn()
+                                    entity.getLivro().getIsbn()
                             )
                     )
             );
@@ -55,13 +55,13 @@ public class CapituloController {
         return new Capitulo(
                 entity.getId(),
                 new Livro(
-                        entity.getLivroEntity().getId(),
+                        entity.getLivro().getId(),
                         new Editora(
-                                entity.getLivroEntity().getEditoraEntity().getId(),
-                                entity.getLivroEntity().getEditoraEntity().getNome(),
-                                entity.getLivroEntity().getEditoraEntity().getPais()
+                                entity.getLivro().getEditora().getId(),
+                                entity.getLivro().getEditora().getNome(),
+                                entity.getLivro().getEditora().getPais()
                         ),
-                        entity.getLivroEntity().getIsbn()
+                        entity.getLivro().getIsbn()
                 )
         );
     }

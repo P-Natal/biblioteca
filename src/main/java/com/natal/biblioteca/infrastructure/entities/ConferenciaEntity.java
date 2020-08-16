@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@NamedQuery(name = "buscaTodos", query = "select c from ConferenciaEntity c")
+@NamedQuery(name = "buscaTodosConferencia", query = "select c from ConferenciaEntity c")
 public class ConferenciaEntity {
 
     @Id

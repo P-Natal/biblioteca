@@ -19,7 +19,7 @@ public class EditoraRepository {
 
     @SuppressWarnings("unchecked")
     public List<EditoraEntity> buscaTodos() {
-        return this.entityManager.createNamedQuery("buscaTodos").getResultList();
+        return this.entityManager.createNamedQuery("buscaTodosEditora").getResultList();
     }
 
 

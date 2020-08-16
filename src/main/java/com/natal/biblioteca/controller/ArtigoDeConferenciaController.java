@@ -28,14 +28,14 @@ public class ArtigoDeConferenciaController {
             artigoDeConferencias.add(new ArtigoDeConferencia(
                         entity.getId(),
                         new Conferencia(
-                                entity.getConferenciaEntity().getId(),
-                                entity.getConferenciaEntity().getNome(),
-                                entity.getConferenciaEntity().getAcronimo(),
-                                entity.getConferenciaEntity().getEdicao(),
-                                entity.getConferenciaEntity().getCidade(),
-                                entity.getConferenciaEntity().getPais(),
-                                entity.getConferenciaEntity().getData_inicio(),
-                                entity.getConferenciaEntity().getData_fim()
+                                entity.getConferencia().getId(),
+                                entity.getConferencia().getNome(),
+                                entity.getConferencia().getAcronimo(),
+                                entity.getConferencia().getEdicao(),
+                                entity.getConferencia().getCidade(),
+                                entity.getConferencia().getPais(),
+                                entity.getConferencia().getData_inicio(),
+                                entity.getConferencia().getData_fim()
                         ),
                         entity.getTipo()
             ));
@@ -52,14 +52,14 @@ public class ArtigoDeConferenciaController {
         return new ArtigoDeConferencia(
                 entity.getId(),
                 new Conferencia(
-                        entity.getConferenciaEntity().getId(),
-                        entity.getConferenciaEntity().getNome(),
-                        entity.getConferenciaEntity().getAcronimo(),
-                        entity.getConferenciaEntity().getEdicao(),
-                        entity.getConferenciaEntity().getCidade(),
-                        entity.getConferenciaEntity().getPais(),
-                        entity.getConferenciaEntity().getData_inicio(),
-                        entity.getConferenciaEntity().getData_fim()
+                        entity.getConferencia().getId(),
+                        entity.getConferencia().getNome(),
+                        entity.getConferencia().getAcronimo(),
+                        entity.getConferencia().getEdicao(),
+                        entity.getConferencia().getCidade(),
+                        entity.getConferencia().getPais(),
+                        entity.getConferencia().getData_inicio(),
+                        entity.getConferencia().getData_fim()
                 ),
                 entity.getTipo()
         );

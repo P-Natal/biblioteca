@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = "buscaTodos", query = "select l from LivroEntity l")
+@NamedQuery(name = "buscaTodosLivro", query = "select l from LivroEntity l")
 public class LivroEntity {
 
     @Id
@@ -12,7 +12,7 @@ public class LivroEntity {
     private Long id;
 
     @ManyToOne
-    private EditoraEntity editoraEntity;
+    private EditoraEntity editora;
 
     @Column(name = "isbn")
     private int isbn;
@@ -21,13 +21,13 @@ public class LivroEntity {
     private List<CapituloEntity> capituloEntities;
 
     public LivroEntity(EditoraEntity editoraEntity, int isbn, List<CapituloEntity> capituloEntities) {
-        this.editoraEntity = editoraEntity;
+        this.editora = editoraEntity;
         this.isbn = isbn;
         this.capituloEntities = capituloEntities;
     }
 
     public LivroEntity(EditoraEntity editoraEntity, int isbn) {
-        this.editoraEntity = editoraEntity;
+        this.editora = editoraEntity;
         this.isbn = isbn;
     }
 
@@ -39,12 +39,12 @@ public class LivroEntity {
         this.id = id;
     }
 
-    public EditoraEntity getEditoraEntity() {
-        return editoraEntity;
+    public EditoraEntity getEditora() {
+        return editora;
     }
 
-    public void setEditoraEntity(EditoraEntity editoraEntity) {
-        this.editoraEntity = editoraEntity;
+    public void setEditora(EditoraEntity editora) {
+        this.editora = editora;
     }
 
     public int getIsbn() {

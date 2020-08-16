@@ -19,7 +19,7 @@ public class CapituloRepository {
 
     @SuppressWarnings("unchecked")
     public List<CapituloEntity> buscaTodos() {
-        return this.entityManager.createNamedQuery("buscaTodos").getResultList();
+        return this.entityManager.createNamedQuery("buscaTodosCapitulo").getResultList();
     }
 
 

@@ -34,15 +34,15 @@ public class ArtigoDePeriodicoController {
             artigos.add(new ArtigoDePeriodico(
                     entity.getId(),
                     new Periodico(
-                            entity.getPeriodicoEntity().getId(),
+                            entity.getPeriodico().getId(),
                             new Editora(
-                                    entity.getPeriodicoEntity().getEditoraEntity().getId(),
-                                    entity.getPeriodicoEntity().getEditoraEntity().getNome(),
-                                    entity.getPeriodicoEntity().getEditoraEntity().getPais()
+                                    entity.getPeriodico().getEditora().getId(),
+                                    entity.getPeriodico().getEditora().getNome(),
+                                    entity.getPeriodico().getEditora().getPais()
                             ),
-                            entity.getPeriodicoEntity().getTitulo(),
-                            entity.getPeriodicoEntity().getAcronimo(),
-                            entity.getPeriodicoEntity().getIssn()
+                            entity.getPeriodico().getTitulo(),
+                            entity.getPeriodico().getAcronimo(),
+                            entity.getPeriodico().getIssn()
                     ),
                     entity.getEdicao(),
                     entity.getVolume()
@@ -60,15 +60,15 @@ public class ArtigoDePeriodicoController {
         return new ArtigoDePeriodico(
                 entity.getId(),
                 new Periodico(
-                        entity.getPeriodicoEntity().getId(),
+                        entity.getPeriodico().getId(),
                         new Editora(
-                                entity.getPeriodicoEntity().getEditoraEntity().getId(),
-                                entity.getPeriodicoEntity().getEditoraEntity().getNome(),
-                                entity.getPeriodicoEntity().getEditoraEntity().getPais()
+                                entity.getPeriodico().getEditora().getId(),
+                                entity.getPeriodico().getEditora().getNome(),
+                                entity.getPeriodico().getEditora().getPais()
                         ),
-                        entity.getPeriodicoEntity().getTitulo(),
-                        entity.getPeriodicoEntity().getAcronimo(),
-                        entity.getPeriodicoEntity().getIssn()
+                        entity.getPeriodico().getTitulo(),
+                        entity.getPeriodico().getAcronimo(),
+                        entity.getPeriodico().getIssn()
                 ),
                 entity.getEdicao(),
                 entity.getVolume()
