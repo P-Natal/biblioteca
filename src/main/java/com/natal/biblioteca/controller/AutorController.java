@@ -70,10 +70,10 @@ public class AutorController {
     @DELETE
     @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
-    public String deletar(Long id){
+    @Path("/deletar/{id}")
+    public String deletar(@PathParam("id") int id){
         try {
-            repository.excluir(id);
+            repository.excluir((long) id);
             return "Autor removido com sucesso!";
         } catch (Exception e) {
             return "Erro ao remover o registro " + e.getMessage();

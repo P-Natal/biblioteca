@@ -1,6 +1,7 @@
 package com.natal.biblioteca.servlets;
 
 import com.natal.biblioteca.infrastructure.entities.AutorEntity;
+import com.natal.biblioteca.infrastructure.repository.AutorRepository;
 
 import javax.persistence.*;
 import javax.servlet.RequestDispatcher;
@@ -16,6 +17,8 @@ import java.util.List;
 @WebServlet(name = "autor-service")
 public class AutorService extends HttpServlet {
 
+
+    private AutorRepository autorRepository = new AutorRepository();
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
 
@@ -53,9 +56,9 @@ public class AutorService extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
         PrintWriter output = response.getWriter();
-        Long id = Long.valueOf(request.getParameter("id"));
+        String id = (request.getParameter("id"));
         try{
-            deletaAutor(id);
+            deletaAutor(Long.valueOf(id));
             output.println("<h3>Autor removido com sucesso<h3>");
         }
         catch (Exception e){
@@ -68,11 +71,7 @@ public class AutorService extends HttpServlet {
     }
 
     private void deletaAutor(Long id) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction et = em.getTransaction();
-        AutorEntity autorEntity = em.find(AutorEntity.class, id);
-        em.remove(autorEntity);
+        autorRepository.excluir(id);
     }
 
     private AutorEntity persisteAutor(HttpServletRequest request){
@@ -95,10 +94,7 @@ public class AutorService extends HttpServlet {
     }
 
     private List<AutorEntity> buscaTodosAutores(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
-        EntityManager em = emf.createEntityManager();
-        Query query = em.createNamedQuery("buscaTodosAutor");
-        return query.getResultList();
+        return autorRepository.buscaTodos();
     }
 
     private List<AutorEntity> buscarAutorPorNome(String primeiroNome) {

@@ -8,7 +8,7 @@
 
     <body>
         <fieldset> <legend>Cadastro de autores</legend>
-            <form action="autorEntity" method="post">
+            <form action="autor-service" method="post">
                 <label>Primeiro Nome</label> <input type="text" name="primNome"/> <br>
                 <label>Nome do meio</label> <input type="text" name="nomeMeio"/> <br>
                 <label>Último nome</label> <input type="text" name="ultNome"/> <br>
@@ -23,14 +23,14 @@
         <br>
 
         <fieldset> <legend>Remoção de autores</legend>
-            <form  action="autorEntity" method="delete">
+            <form  action="autor-service" method="delete">
                 <label>ID do Autor</label> <input type="number" name="id" />
                 <button>Remover</button>
             </form>
         </fieldset>
 
         <fieldset> <legend>Autores cadastrados</legend>
-            <form action="autorEntity" method="get">
+            <form action="autor-service" method="get">
                 <button>Buscar</button>
             </form>
         </fieldset>
