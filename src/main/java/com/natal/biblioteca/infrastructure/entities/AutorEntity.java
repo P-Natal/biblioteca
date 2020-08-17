@@ -4,7 +4,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = "buscaTodosAutor", query = "select a from AutorEntity a")
+@NamedQueries({
+    @NamedQuery(name = "buscaTodosAutor", query = "select a from AutorEntity a"),
+    @NamedQuery(name = "buscarAutoresPorPrimeiroNome" , query = "select a from AutorEntity a where primeiro_nome = :primNome"),
+    @NamedQuery(name = "buscarAutoresPorAfiliacao", query = "select a from AutorEntity a where afiliacao = :afiliacao")
+})
 public class AutorEntity {
 
     @Id

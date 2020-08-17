@@ -46,9 +46,35 @@ public class AutorService extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         PrintWriter output = response.getWriter();
-        output.println("<fieldset>Autores cadastrados<fieldset>");
-        for (AutorEntity autorEntity : buscaTodosAutores()){
-            output.println("<h3>" + autorEntity.toString() + "</h3>");
+
+        String primNome = (request.getParameter("primNome"));
+        String afiliacao = (request.getParameter("afiliacao"));
+
+        if(primNome != null){
+            List<AutorEntity> autores = buscarAutorPorNome(primNome);
+
+            output.println("<fieldset> <legend>Lista de autores cadastrados com primeiro nome = " + primNome + "</legend>");
+
+            for (AutorEntity aut : autores){
+                output.println("<h2>" + aut.toString() + "</h2>");
+            }
+            output.println("</fieldset>");
+        }
+        if (afiliacao != null){
+            List<AutorEntity> autores = buscarAutorPorAfiliacao(afiliacao);
+
+            output.println("<fieldset> <legend>Lista de autores cadastrados com afiliacao = " + afiliacao + "</legend>");
+            for (AutorEntity aut : autores){
+                output.println("<h2>" + aut.toString() + "</h2>");
+            }
+            output.println("</fieldset>");
+        }
+        else {
+            output.println("<fieldset>Autores cadastrados (Total)<fieldset>");
+            for (AutorEntity autorEntity : buscaTodosAutores()){
+                output.println("<h3>" + autorEntity.toString() + "</h3>");
+            }
+            output.println("</fieldset>");
         }
     }
 
@@ -98,19 +124,11 @@ public class AutorService extends HttpServlet {
     }
 
     private List<AutorEntity> buscarAutorPorNome(String primeiroNome) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
-        EntityManager em = emf.createEntityManager();
-        Query query = em.createNamedQuery("buscaAutorPorNome");
-        query.setParameter("primeiroNome", primeiroNome);
-        return query.getResultList();
+        return autorRepository.buscarPorPrimeiroNome(primeiroNome);
     }
 
     private List<AutorEntity> buscarAutorPorAfiliacao(String afiliacao) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("bibliotecadb");
-        EntityManager em = emf.createEntityManager();
-        Query query = em.createNamedQuery("buscaAutorPorAfiliacao");
-        query.setParameter("afiliacao", afiliacao);
-        return query.getResultList();
+        return autorRepository.buscarPorAfiliacao(afiliacao);
     }
 
     private void showResultInPage(HttpServletRequest request, HttpServletResponse response, List<AutorEntity> autores) throws ServletException, IOException {

@@ -16,7 +16,7 @@
                 <label>email</label> <input type="email" name="email"/> <br>
                 <label>País</label> <input type="text" name="pais"/> <br>
                 <br>
-                <button>Cadastrar</button>
+                <button type="submit">Cadastrar</button>
             </form>
         </fieldset>
 
@@ -25,13 +25,21 @@
         <fieldset> <legend>Remoção de autores</legend>
             <form  action="autor-service" method="delete">
                 <label>ID do Autor</label> <input type="number" name="id" />
-                <button>Remover</button>
+                <button type="submit">Remover</button>
             </form>
         </fieldset>
 
         <fieldset> <legend>Autores cadastrados</legend>
             <form action="autor-service" method="get">
-                <button>Buscar</button>
+                <button type="submit">Buscar</button>
+            </form>
+        </fieldset>
+
+        <fieldset> <legend>Buscar Autor</legend>
+            <form action="autor-service" method="get">
+                <label>Primeiro nome</label> <input type="text" name="primNome"/> <br>
+                <label>Afiliação</label> <input type="text" name="afiliacao"/> <br>
+                <button type="submit">Buscar</button>
             </form>
         </fieldset>
 

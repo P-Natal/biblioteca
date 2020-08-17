@@ -2,10 +2,9 @@ package com.natal.biblioteca.infrastructure.repository;
 
 import com.natal.biblioteca.infrastructure.entities.AutorEntity;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Queue;
 
 public class AutorRepository {
 
@@ -45,5 +44,17 @@ public class AutorRepository {
         this.entityManager.getTransaction().begin();
         this.entityManager.remove(autorEntity);
         this.entityManager.getTransaction().commit();
+    }
+
+    public List<AutorEntity> buscarPorPrimeiroNome(String primeiroNome) {
+        Query query = this.entityManager.createNamedQuery("buscarAutoresPorPrimeiroNome");
+        query.setParameter("primNome", primeiroNome);
+        return query.getResultList();
+    }
+
+    public List<AutorEntity> buscarPorAfiliacao(String afiliacao) {
+        Query query = this.entityManager.createNamedQuery("buscarAutoresPorAfiliacao");
+        query.setParameter("afiliacao", afiliacao);
+        return query.getResultList();
     }
 }
