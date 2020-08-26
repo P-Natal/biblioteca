@@ -2,9 +2,11 @@ package com.natal.biblioteca.infrastructure.repository;
 
 import com.natal.biblioteca.infrastructure.entities.AutorEntity;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.List;
-import java.util.Queue;
 
 public class AutorRepository {
 
@@ -40,7 +42,6 @@ public class AutorRepository {
 
     public void excluir(Long id){
         AutorEntity autorEntity = this.getAutor(id);
-
         this.entityManager.getTransaction().begin();
         this.entityManager.remove(autorEntity);
         this.entityManager.getTransaction().commit();

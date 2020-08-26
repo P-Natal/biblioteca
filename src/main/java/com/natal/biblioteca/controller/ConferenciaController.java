@@ -38,9 +38,8 @@ public class ConferenciaController {
     }
 
     @GET
-    @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
+    @Path("/buscar")
     public Conferencia buscaConferencia(Long id){
         ConferenciaEntity entity = repository.getConferencia(id);
         return new Conferencia(
@@ -81,10 +80,10 @@ public class ConferenciaController {
     @DELETE
     @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
-    public String deletar(Conferencia conferencia){
+    @Path("/deletar/{id}")
+    public String deletar(@PathParam("id") int id){
         try {
-            repository.excluir(conferencia.getId());
+            repository.excluir((long) id);
             return "Conferencia removido com sucesso!";
         } catch (Exception e) {
             return "Erro ao remover o registro " + e.getMessage();

@@ -47,9 +47,8 @@ public class CapituloController {
 
 
     @GET
-    @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
+    @Path("/buscar")
     public Capitulo buscaCapitulo(Long id){
         CapituloEntity entity = repository.getCapitulo(id);
         return new Capitulo(
@@ -92,10 +91,10 @@ public class CapituloController {
     @DELETE
     @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
-    public String deletar(Capitulo capitulo){
+    @Path("/deletar/{id}")
+    public String deletar(@PathParam("id") int id){
         try {
-            repository.excluir(capitulo.getId());
+            repository.excluir((long) id);
             return "Capitulo removido com sucesso!";
         } catch (Exception e) {
             return "Erro ao remover o registro " + e.getMessage();

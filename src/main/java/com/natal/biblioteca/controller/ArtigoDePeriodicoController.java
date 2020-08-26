@@ -4,9 +4,11 @@ import com.natal.biblioteca.controller.model.ArtigoDePeriodico;
 import com.natal.biblioteca.controller.model.Editora;
 import com.natal.biblioteca.controller.model.Periodico;
 import com.natal.biblioteca.infrastructure.entities.ArtigoDePeriodicoEntity;
+import com.natal.biblioteca.infrastructure.entities.AutorEntity;
 import com.natal.biblioteca.infrastructure.entities.EditoraEntity;
 import com.natal.biblioteca.infrastructure.entities.PeriodicoEntity;
 import com.natal.biblioteca.infrastructure.repository.ArtigoDePeriodicoRepository;
+import com.natal.biblioteca.infrastructure.repository.AutorRepository;
 import com.natal.biblioteca.infrastructure.repository.EditoraRepository;
 import com.natal.biblioteca.infrastructure.repository.PeriodicoRepository;
 
@@ -20,6 +22,7 @@ public class ArtigoDePeriodicoController {
     private ArtigoDePeriodicoRepository repository = new ArtigoDePeriodicoRepository();
     private PeriodicoRepository periodicoRepository = new PeriodicoRepository();
     private EditoraRepository editoraoRepository = new EditoraRepository();
+    private AutorRepository autorRepository = new AutorRepository();
 
     @GET
     @Produces("application/json; charset=UTF-8")
@@ -52,13 +55,17 @@ public class ArtigoDePeriodicoController {
     }
 
     @GET
-    @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
+    @Path("/buscar")
     public ArtigoDePeriodico buscaArtigoDePeriodico(Long id){
         ArtigoDePeriodicoEntity entity = repository.getArtigo(id);
         return new ArtigoDePeriodico(
                 entity.getId(),
+                entity.getTitulo(),
+                entity.getData_publicacao(),
+                entity.isAcesso_livre(),
+                entity.getDoi(),
+                entity.getAutor().getId(),
                 new Periodico(
                         entity.getPeriodico().getId(),
                         new Editora(
@@ -82,32 +89,47 @@ public class ArtigoDePeriodicoController {
     public String cadastrar(ArtigoDePeriodico artigo){
         ArtigoDePeriodicoEntity entity;
         try {
-            EditoraEntity editoraEntity = editoraoRepository.getEditora(artigo.getPeriodico().getId());
+            AutorEntity autorEntity = autorRepository.getAutor(artigo.getId_autor());
 
-            if (editoraEntity == null){
-                editoraEntity = new EditoraEntity(
-                        artigo.getPeriodico().getEditora().getNome(),
-                        artigo.getPeriodico().getEditora().getPais()
+            if (autorEntity != null){
+
+                EditoraEntity editoraEntity = editoraoRepository.getEditora(artigo.getPeriodico().getId());
+                PeriodicoEntity periodicoEntity = periodicoRepository.getPeriodico(artigo.getPeriodico().getId());
+
+                if (editoraEntity == null){
+                    editoraEntity = new EditoraEntity(
+                            artigo.getPeriodico().getEditora().getNome(),
+                            artigo.getPeriodico().getEditora().getPais()
+                    );
+                }
+
+                if (periodicoEntity == null){
+                    periodicoEntity = new PeriodicoEntity(
+                            editoraEntity,
+                            artigo.getPeriodico().getTitulo(),
+                            artigo.getPeriodico().getAcronimo(),
+                            artigo.getPeriodico().getIssn()
+                    );
+                }
+
+                entity = new ArtigoDePeriodicoEntity(
+                        artigo.getTitulo(),
+                        artigo.getData_publicacao(),
+                        artigo.isAcesso_livre(),
+                        artigo.getDoi(),
+                        autorEntity,
+                        periodicoEntity,
+                        artigo.getEdicao(),
+                        artigo.getVolume()
                 );
+                repository.salvar(entity);
+                return "Registro cadastrado com sucesso!";
+
+            }
+            else{
+                throw new NullPointerException("Autor nao pode ser nulo!");
             }
 
-            PeriodicoEntity periodicoEntity = periodicoRepository.getPeriodico(artigo.getPeriodico().getId());
-            if (periodicoEntity == null){
-                periodicoEntity = new PeriodicoEntity(
-                        editoraEntity,
-                        artigo.getPeriodico().getTitulo(),
-                        artigo.getPeriodico().getAcronimo(),
-                        artigo.getPeriodico().getIssn()
-                );
-            }
-
-            entity = new ArtigoDePeriodicoEntity(
-                    periodicoEntity,
-                    artigo.getEdicao(),
-                    artigo.getVolume()
-            );
-            repository.salvar(entity);
-            return "Registro cadastrado com sucesso!";
         } catch (Exception e) {
             return "Erro ao cadastrar um registro " + e.getMessage();
         }
@@ -116,10 +138,10 @@ public class ArtigoDePeriodicoController {
     @DELETE
     @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
-    public String deletar(ArtigoDePeriodico artigo){
+    @Path("/deletar/{id}")
+    public String deletar(@PathParam("id") int id){
         try {
-            repository.excluir(artigo.getId());
+            repository.excluir((long) id);
             return "ArtigoDePeriodico removido com sucesso!";
         } catch (Exception e) {
             return "Erro ao remover o registro " + e.getMessage();

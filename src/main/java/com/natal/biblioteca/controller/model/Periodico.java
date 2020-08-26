@@ -1,11 +1,9 @@
 package com.natal.biblioteca.controller.model;
 
-import com.natal.biblioteca.infrastructure.entities.EditoraEntity;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Periodico {
+public class Periodico extends Publicacao {
 
     private Long id;
 

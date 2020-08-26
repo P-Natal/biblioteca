@@ -1,10 +1,12 @@
 package com.natal.biblioteca.infrastructure.repository;
 
+import com.natal.biblioteca.infrastructure.entities.AutorEntity;
 import com.natal.biblioteca.infrastructure.entities.CapituloEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CapituloRepository {
@@ -45,5 +47,10 @@ public class CapituloRepository {
         this.entityManager.getTransaction().begin();
         this.entityManager.remove(capituloEntity);
         this.entityManager.getTransaction().commit();
+    }
+
+    public List<CapituloEntity> buscarPorAutor(AutorEntity autorEntity) {
+
+        return new ArrayList<CapituloEntity>();
     }
 }

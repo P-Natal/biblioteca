@@ -43,7 +43,12 @@ CREATE TABLE "public"."artigo_de_conferencia"
     id              BIGSERIAL NOT NULL PRIMARY KEY,
     publicacao_id   BIGSERIAL NOT NULL REFERENCES publicacao(id),
     conferencia_id  BIGSERIAL NOT NULL REFERENCES conferencia(id),
-    tipo            VARCHAR(10) NOT NULL
+    tipo            VARCHAR(10) NOT NULL,
+    titulo          VARCHAR(20) NOT NULL,
+    data_publicacao TIMESTAMP NOT NULL,
+    acesso_livre    boolean NOT NULL,
+    afiliacao       VARCHAR(20) NOT NULL,
+    doi             VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE "public"."editora"
@@ -68,7 +73,12 @@ CREATE TABLE "public"."artigo_periodico"
     publicacao_id   BIGSERIAL NOT NULL REFERENCES publicacao(id),
     periodico_id    BIGSERIAL NOT NULL REFERENCES periodico(id),
     edicao          int NOT NULL,
-    volume          int NOT NULL
+    volume          int NOT NULL,
+    titulo          VARCHAR(20) NOT NULL,
+    data_publicacao TIMESTAMP NOT NULL,
+    acesso_livre    boolean NOT NULL,
+    afiliacao       VARCHAR(20) NOT NULL,
+    doi             VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE "public"."livro"
@@ -76,7 +86,12 @@ CREATE TABLE "public"."livro"
     id              BIGSERIAL NOT NULL PRIMARY KEY,
     publicacao_id   BIGSERIAL NOT NULL REFERENCES publicacao(id),
     editora_id      BIGSERIAL NOT NULL REFERENCES editora(id),
-    isbn            int NOT NULL
+    isbn            int NOT NULL,
+    titulo          VARCHAR(20) NOT NULL,
+    data_publicacao TIMESTAMP NOT NULL,
+    acesso_livre    boolean NOT NULL,
+    afiliacao       VARCHAR(20) NOT NULL,
+    doi             VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE "public"."capitulo"

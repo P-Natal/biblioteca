@@ -16,6 +16,9 @@ public class PublicacaoAutorEntity {
     @ManyToOne
     private PublicacaoEntity publicacao;
 
+    public PublicacaoAutorEntity() {
+    }
+
     public PublicacaoAutorEntity(AutorEntity autorEntity, PublicacaoEntity publicacaoEntity) {
         this.autor = autorEntity;
         this.publicacao = publicacaoEntity;

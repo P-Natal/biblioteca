@@ -1,8 +1,9 @@
 package com.natal.biblioteca.controller;
 
-import com.natal.biblioteca.controller.model.Autor;
-import com.natal.biblioteca.infrastructure.entities.AutorEntity;
-import com.natal.biblioteca.infrastructure.repository.AutorRepository;
+import com.natal.biblioteca.controller.to.BuscaPublicacoesResponse;
+import com.natal.biblioteca.controller.model.*;
+import com.natal.biblioteca.infrastructure.entities.*;
+import com.natal.biblioteca.infrastructure.repository.*;
 
 import javax.ws.rs.*;
 import java.util.ArrayList;
@@ -12,6 +13,10 @@ import java.util.List;
 public class AutorController {
 
     private AutorRepository repository = new AutorRepository();
+    private LivroRepository livroRepository = new LivroRepository();
+    private CapituloRepository capituloRepository = new CapituloRepository();
+    private ArtigoDeConferenciaRepository artigoDeConferenciaRepository = new ArtigoDeConferenciaRepository();
+    private ArtigoDePeriodicoRepository artigoDePeriodicoRepository  = new ArtigoDePeriodicoRepository();
 
     @GET
     @Produces("application/json; charset=UTF-8")
@@ -29,9 +34,8 @@ public class AutorController {
     }
 
     @GET
-    @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
+    @Path("/buscar")
     public Autor buscaAutor(Long id){
         AutorEntity autorEntity = repository.getAutor(id);
         return new Autor(
@@ -77,6 +81,25 @@ public class AutorController {
             return "Autor removido com sucesso!";
         } catch (Exception e) {
             return "Erro ao remover o registro " + e.getMessage();
+        }
+    }
+
+    @GET
+    @Produces("application/json; charset=UTF-8")
+    @Path("/busca-publicacoes")
+    public BuscaPublicacoesResponse buscaTodasPublicacoesPorPrimNomeAutor(String primNome){
+        AutorEntity autorEntity = repository.buscarPorPrimeiroNome(primNome).get(0);
+        List<LivroEntity> livros = livroRepository.buscarPorAutor(autorEntity);
+        List<CapituloEntity> capitulos = capituloRepository.buscarPorAutor(autorEntity);
+        List<ArtigoDeConferenciaEntity> artigosDeConferencia = artigoDeConferenciaRepository.buscarPorAutor(autorEntity);
+        List<ArtigoDePeriodicoEntity> artigosDePeriodico = artigoDePeriodicoRepository.buscarPorAutor(autorEntity);
+
+        try{
+            BuscaPublicacoesResponse response = new BuscaPublicacoesResponse(livros, capitulos, artigosDeConferencia, artigosDePeriodico);
+            return response;
+        }
+        catch (Exception e){
+            throw new RuntimeException("Falha ao gerar objeto de resposta");
         }
     }
 

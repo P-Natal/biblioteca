@@ -37,7 +37,7 @@ public class EditoraController {
     @GET
     @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
+    @Path("/buscar")
     public Editora buscaEditora(Long id){
         EditoraEntity entity = repository.getEditora(id);
         return new Editora(
@@ -68,10 +68,10 @@ public class EditoraController {
     @DELETE
     @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
-    public String deletar(Editora editora){
+    @Path("/deletar/{id}")
+    public String deletar(@PathParam("id") int id){
         try {
-            repository.excluir(editora.getId());
+            repository.excluir((long) id);
             return "Editora removido com sucesso!";
         } catch (Exception e) {
             return "Erro ao remover o registro " + e.getMessage();

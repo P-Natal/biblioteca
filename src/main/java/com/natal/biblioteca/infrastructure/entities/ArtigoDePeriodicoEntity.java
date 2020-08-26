@@ -1,10 +1,11 @@
 package com.natal.biblioteca.infrastructure.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @NamedQuery(name = "buscaTodosArtigoDePeriodico", query = "select art from ArtigoDePeriodicoEntity art")
-public class ArtigoDePeriodicoEntity {
+public class ArtigoDePeriodicoEntity extends PublicacaoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -19,7 +20,8 @@ public class ArtigoDePeriodicoEntity {
     @Column(name = "volume")
     private int volume;
 
-    public ArtigoDePeriodicoEntity(PeriodicoEntity periodicoEntity, int edicao, int volume) {
+    public ArtigoDePeriodicoEntity(String titulo, Date data_publicacao, boolean acesso_livre, int doi, AutorEntity autorEntity, PeriodicoEntity periodicoEntity, int edicao, int volume) {
+        super(titulo, data_publicacao, acesso_livre, doi, autorEntity);
         this.periodico = periodicoEntity;
         this.edicao = edicao;
         this.volume = volume;

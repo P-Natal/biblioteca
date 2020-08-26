@@ -3,7 +3,10 @@ package com.natal.biblioteca.servlets;
 import com.natal.biblioteca.infrastructure.entities.AutorEntity;
 import com.natal.biblioteca.infrastructure.repository.AutorRepository;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -79,10 +82,11 @@ public class AutorService extends HttpServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         PrintWriter output = response.getWriter();
-        String id = (request.getParameter("id"));
+        String id = (request.getParameter("idAutor"));
+        output.println("<h3>ID capturado: "+id+"<h3>");
         try{
             deletaAutor(Long.valueOf(id));
             output.println("<h3>Autor removido com sucesso<h3>");

@@ -45,9 +45,8 @@ public class PeriodicoController {
     }
 
     @GET
-    @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
+    @Path("/buscar")
     public Periodico buscaPeriodico(Long id){
         PeriodicoEntity entity = repository.getPeriodico(id);
 
@@ -97,10 +96,10 @@ public class PeriodicoController {
     @DELETE
     @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
-    public String deletar(Periodico periodico){
+    @Path("/deletar/{id}")
+    public String deletar(@PathParam("id") int id){
         try {
-            repository.excluir(periodico.getId());
+            repository.excluir((long) id);
             return "Periodico removido com sucesso!";
         } catch (Exception e) {
             return "Erro ao remover o registro " + e.getMessage();

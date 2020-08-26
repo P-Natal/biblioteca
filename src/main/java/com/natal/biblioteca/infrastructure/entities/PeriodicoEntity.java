@@ -1,6 +1,7 @@
 package com.natal.biblioteca.infrastructure.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @NamedQuery(name = "buscaTodosPeriodico", query = "select p from PeriodicoEntity p")

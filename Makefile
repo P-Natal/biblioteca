@@ -6,7 +6,7 @@ FLYWAY_DB_PASSWORD_LOCAL= -Dflyway.password=postgres
 FLYWAY_DB_URL_LOCAL=-Dflyway.url=jdbc:postgresql://localhost:5432/bibliotecadb
 
 
-run: build
+build-run: build
 	docker-compose up
 
 run-d: build

@@ -3,10 +3,11 @@ package com.natal.biblioteca.infrastructure.entities;
 import com.natal.biblioteca.infrastructure.entities.auxiliar.TipoArtigo;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @NamedQuery(name = "buscaTodosArtigoDeConferencia", query = "select art from ArtigoDeConferenciaEntity art")
-public class ArtigoDeConferenciaEntity {
+public class ArtigoDeConferenciaEntity extends PublicacaoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -19,8 +20,8 @@ public class ArtigoDeConferenciaEntity {
     @Enumerated(EnumType.STRING)
     private TipoArtigo tipo;
 
-    public ArtigoDeConferenciaEntity(Long id, ConferenciaEntity conferenciaEntity, TipoArtigo tipo) {
-        Id = id;
+    public ArtigoDeConferenciaEntity(String titulo, Date data_publicacao, boolean acesso_livre, int doi, AutorEntity autorEntity, ConferenciaEntity conferenciaEntity, TipoArtigo tipo) {
+        super(titulo, data_publicacao, acesso_livre, doi, autorEntity);
         this.conferencia = conferenciaEntity;
         this.tipo = tipo;
     }

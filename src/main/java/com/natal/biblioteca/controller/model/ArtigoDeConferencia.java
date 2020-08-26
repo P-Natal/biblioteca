@@ -2,13 +2,13 @@ package com.natal.biblioteca.controller.model;
 
 import com.natal.biblioteca.infrastructure.entities.auxiliar.TipoArtigo;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 @XmlRootElement
-public class ArtigoDeConferencia {
+public class ArtigoDeConferencia extends Publicacao{
 
-    private Long Id;
+    private Long id;
 
     private Conferencia conferenciaEntity;
 
@@ -17,18 +17,25 @@ public class ArtigoDeConferencia {
     public ArtigoDeConferencia() {
     }
 
-    public ArtigoDeConferencia(Long id, Conferencia conferenciaEntity, TipoArtigo tipo) {
-        Id = id;
+    public ArtigoDeConferencia(String titulo, Date data_publicacao, boolean acesso_livre, int doi, Long id_autor, Conferencia conferenciaEntity, TipoArtigo tipo) {
+        super(titulo, data_publicacao, acesso_livre, doi, id_autor);
+        this.conferenciaEntity = conferenciaEntity;
+        this.tipo = tipo;
+    }
+
+    public ArtigoDeConferencia(Long id, String titulo, Date data_publicacao, boolean acesso_livre, int doi, Long id_autor, Conferencia conferenciaEntity, TipoArtigo tipo) {
+        super(titulo, data_publicacao, acesso_livre, doi, id_autor);
+        this.id = id;
         this.conferenciaEntity = conferenciaEntity;
         this.tipo = tipo;
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        id = id;
     }
 
     public Conferencia getConferenciaEntity() {

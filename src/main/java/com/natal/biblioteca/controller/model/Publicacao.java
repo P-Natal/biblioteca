@@ -1,43 +1,40 @@
-package com.natal.biblioteca.infrastructure.entities;
+package com.natal.biblioteca.controller.model;
 
-import com.natal.biblioteca.controller.model.Autor;
-
-import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
-import java.util.List;
 
-@Entity
-@NamedQuery(name = "buscaTodosPublicacao", query = "select p from PublicacaoEntity p")
-public class PublicacaoEntity {
+@XmlRootElement
+public class Publicacao {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "titulo")
     private String titulo;
 
-    @Column(name = "data_publicacao")
     private Date data_publicacao;
 
-    @Column(name = "acesso_livre")
     private boolean acesso_livre;
 
-    @Column(name = "doi")
     private int doi;
 
-    @ManyToOne
-    private AutorEntity autor;
+    private Long id_autor;
 
-    public PublicacaoEntity() {
-    }
+    public Publicacao() {}
 
-    public PublicacaoEntity(String titulo, Date data_publicacao, boolean acesso_livre, int doi, AutorEntity autorEntity) {
+    public Publicacao(Long id, String titulo, Date data_publicacao, boolean acesso_livre, int doi, Long id_autor) {
+        this.id = id;
         this.titulo = titulo;
         this.data_publicacao = data_publicacao;
         this.acesso_livre = acesso_livre;
         this.doi = doi;
-        this.autor = autorEntity;
+        this.id_autor = id_autor;
+    }
+
+    public Publicacao(String titulo, Date data_publicacao, boolean acesso_livre, int doi, Long id_autor) {
+        this.titulo = titulo;
+        this.data_publicacao = data_publicacao;
+        this.acesso_livre = acesso_livre;
+        this.doi = doi;
+        this.id_autor = id_autor;
     }
 
     public Long getId() {
@@ -80,11 +77,11 @@ public class PublicacaoEntity {
         this.doi = doi;
     }
 
-    public AutorEntity getAutor() {
-        return autor;
+    public Long getId_autor() {
+        return id_autor;
     }
 
-    public void setAutor(AutorEntity autor) {
-        this.autor = autor;
+    public void setId_autor(Long id_autor) {
+        this.id_autor = id_autor;
     }
 }

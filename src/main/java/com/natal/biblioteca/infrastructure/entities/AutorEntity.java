@@ -34,7 +34,7 @@ public class AutorEntity {
     private String pais;
 
     @OneToMany(mappedBy = "autor", fetch = FetchType.LAZY)
-    private List<PublicacaoAutorEntity> publicacaoAutorEntity;
+    private List<PublicacaoEntity> publicacoes;
 
     public AutorEntity() {
     }
@@ -76,8 +76,8 @@ public class AutorEntity {
         return pais;
     }
 
-    public List<PublicacaoAutorEntity> getPublicacaoAutorEntity() {
-        return publicacaoAutorEntity;
+    public List<PublicacaoEntity> getPublicacoes() {
+        return publicacoes;
     }
 
     @Override

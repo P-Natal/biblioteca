@@ -2,9 +2,10 @@ package com.natal.biblioteca.controller.model;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 @XmlRootElement
-public class ArtigoDePeriodico {
+public class ArtigoDePeriodico extends Publicacao {
 
     private Long id;
 
@@ -18,6 +19,21 @@ public class ArtigoDePeriodico {
     }
 
     public ArtigoDePeriodico(Long id, Periodico periodico, int edicao, int volume) {
+        this.id = id;
+        this.periodico = periodico;
+        this.edicao = edicao;
+        this.volume = volume;
+    }
+
+    public ArtigoDePeriodico(String titulo, Date data_publicacao, boolean acesso_livre, int doi, Long id_autor, Periodico periodico, int edicao, int volume) {
+        super(titulo, data_publicacao, acesso_livre, doi, id_autor);
+        this.periodico = periodico;
+        this.edicao = edicao;
+        this.volume = volume;
+    }
+
+    public ArtigoDePeriodico(Long id, String titulo, Date data_publicacao, boolean acesso_livre, int doi, Long id_autor, Periodico periodico, int edicao, int volume) {
+        super(titulo, data_publicacao, acesso_livre, doi, id_autor);
         this.id = id;
         this.periodico = periodico;
         this.edicao = edicao;

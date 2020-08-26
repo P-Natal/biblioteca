@@ -1,11 +1,12 @@
 package com.natal.biblioteca.infrastructure.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @NamedQuery(name = "buscaTodosLivro", query = "select l from LivroEntity l")
-public class LivroEntity {
+public class LivroEntity extends PublicacaoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -20,10 +21,17 @@ public class LivroEntity {
     @OneToMany(mappedBy = "livro")
     private List<CapituloEntity> capituloEntities;
 
-    public LivroEntity(EditoraEntity editoraEntity, int isbn, List<CapituloEntity> capituloEntities) {
+    public LivroEntity(String titulo, Date data_publicacao, boolean acesso_livre, int doi, AutorEntity autorEntity, EditoraEntity editoraEntity, int isbn, List<CapituloEntity> capituloEntities) {
+        super(titulo, data_publicacao, acesso_livre, doi, autorEntity);
         this.editora = editoraEntity;
         this.isbn = isbn;
         this.capituloEntities = capituloEntities;
+    }
+
+    public LivroEntity(String titulo, Date data_publicacao, boolean acesso_livre, int doi, AutorEntity autorEntity, EditoraEntity editoraEntity, int isbn) {
+        super(titulo, data_publicacao, acesso_livre, doi, autorEntity);
+        this.editora = editoraEntity;
+        this.isbn = isbn;
     }
 
     public LivroEntity(EditoraEntity editoraEntity, int isbn) {

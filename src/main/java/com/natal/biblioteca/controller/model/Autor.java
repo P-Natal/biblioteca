@@ -1,6 +1,7 @@
 package com.natal.biblioteca.controller.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
 @XmlRootElement
 public class Autor {
@@ -18,6 +19,8 @@ public class Autor {
     private String email;
 
     private String pais;
+
+    private List<Publicacao> publicacoes;
 
     public Autor() {}
 
@@ -94,5 +97,13 @@ public class Autor {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public List<Publicacao> getPublicacoes() {
+        return publicacoes;
+    }
+
+    public void setPublicacoes(List<Publicacao> publicacoes) {
+        this.publicacoes = publicacoes;
     }
 }
