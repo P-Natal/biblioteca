@@ -96,8 +96,16 @@ public class AutorService extends HttpServlet {
         }
     }
 
-    private void deletaAutor(Long id) {
-        autorRepository.excluir(id);
+    private List<AutorEntity> buscaTodosAutores(){
+        return autorRepository.buscaTodos();
+    }
+
+    private List<AutorEntity> buscarAutorPorNome(String primeiroNome) {
+        return autorRepository.buscarPorPrimeiroNome(primeiroNome);
+    }
+
+    private List<AutorEntity> buscarAutorPorAfiliacao(String afiliacao) {
+        return autorRepository.buscarPorAfiliacao(afiliacao);
     }
 
     private AutorEntity persisteAutor(HttpServletRequest request){
@@ -119,16 +127,8 @@ public class AutorService extends HttpServlet {
         return autorEntity;
     }
 
-    private List<AutorEntity> buscaTodosAutores(){
-        return autorRepository.buscaTodos();
-    }
-
-    private List<AutorEntity> buscarAutorPorNome(String primeiroNome) {
-        return autorRepository.buscarPorPrimeiroNome(primeiroNome);
-    }
-
-    private List<AutorEntity> buscarAutorPorAfiliacao(String afiliacao) {
-        return autorRepository.buscarPorAfiliacao(afiliacao);
+    private void deletaAutor(Long id) {
+        autorRepository.excluir(id);
     }
 
     private void showResultInPage(HttpServletRequest request, HttpServletResponse response, List<AutorEntity> autores) throws ServletException, IOException {
