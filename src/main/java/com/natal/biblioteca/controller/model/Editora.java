@@ -11,6 +11,8 @@ public class Editora {
 
     private String pais;
 
+    public Editora(){}
+
     public Editora(Long id, String nome, String pais) {
         this.id = id;
         this.nome = nome;
@@ -39,5 +41,14 @@ public class Editora {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    @Override
+    public String toString() {
+        return "Editora{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", pais='" + pais + '\'' +
+                '}';
     }
 }

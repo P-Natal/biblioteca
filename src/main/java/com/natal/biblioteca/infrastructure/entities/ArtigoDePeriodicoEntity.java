@@ -1,14 +1,15 @@
 package com.natal.biblioteca.infrastructure.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@NamedQuery(name = "buscaTodosArtigoDePeriodico", query = "select art from ArtigoDePeriodicoEntity art")
-public class ArtigoDePeriodicoEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+@Table(name = "artigo_de_periodico")
+@NamedQueries({
+        @NamedQuery(name = "buscaTodosArtigoDePeriodico", query = "select art from ArtigoDePeriodicoEntity art"),
+        @NamedQuery(name = "buscarArtPeriodPorAutor", query = "select art from ArtigoDePeriodicoEntity art join art.autor a where a.id = :autor_id")
+})
+public class ArtigoDePeriodicoEntity extends PublicacaoEntity{
 
     @ManyToOne
     private PeriodicoEntity periodico;
@@ -19,18 +20,23 @@ public class ArtigoDePeriodicoEntity {
     @Column(name = "volume")
     private int volume;
 
-    public ArtigoDePeriodicoEntity(PeriodicoEntity periodicoEntity, int edicao, int volume) {
+    public ArtigoDePeriodicoEntity() {
+        super();
+    }
+
+    public ArtigoDePeriodicoEntity(String titulo, Date data_publicacao, boolean acesso_livre, int doi, AutorEntity autorEntity, PeriodicoEntity periodicoEntity, int edicao, int volume) {
+        super(titulo, data_publicacao, acesso_livre, doi, autorEntity);
         this.periodico = periodicoEntity;
         this.edicao = edicao;
         this.volume = volume;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public ArtigoDePeriodicoEntity(Long id, String titulo, Date data_publicacao, boolean acesso_livre, int doi, AutorEntity autorEntity, PeriodicoEntity periodicoEntity, int edicao, int volume) {
+        super(titulo, data_publicacao, acesso_livre, doi, autorEntity);
+        this.setId(id);
+        this.periodico = periodicoEntity;
+        this.edicao = edicao;
+        this.volume = volume;
     }
 
     public PeriodicoEntity getPeriodico() {

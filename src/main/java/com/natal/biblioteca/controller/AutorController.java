@@ -31,8 +31,8 @@ public class AutorController {
     @GET
     @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
-    public Autor buscaAutor(Long id){
+    @Path("/buscar/{id}")
+    public Autor buscaAutor(@PathParam("id") Long id){
         AutorEntity autorEntity = repository.getAutor(id);
         return new Autor(
                 autorEntity.getId(),

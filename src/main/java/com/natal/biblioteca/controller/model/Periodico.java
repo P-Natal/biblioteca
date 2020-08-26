@@ -1,7 +1,5 @@
 package com.natal.biblioteca.controller.model;
 
-import com.natal.biblioteca.infrastructure.entities.EditoraEntity;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -17,8 +15,17 @@ public class Periodico {
 
     private int issn;
 
+    public Periodico() {}
+
     public Periodico(Long id, Editora editora, String titulo, String acronimo, int issn) {
         this.id = id;
+        this.editora = editora;
+        this.titulo = titulo;
+        this.acronimo = acronimo;
+        this.issn = issn;
+    }
+
+    public Periodico(Editora editora, String titulo, String acronimo, int issn) {
         this.editora = editora;
         this.titulo = titulo;
         this.acronimo = acronimo;
@@ -37,7 +44,7 @@ public class Periodico {
         return editora;
     }
 
-    public void setEditoraEntity(Editora editoraEntity) {
+    public void setEditora(Editora editora) {
         this.editora = editora;
     }
 
@@ -63,5 +70,16 @@ public class Periodico {
 
     public void setIssn(int issn) {
         this.issn = issn;
+    }
+
+    @Override
+    public String toString() {
+        return "Periodico{" +
+                "id=" + id +
+                ", editora=" + editora +
+                ", titulo='" + titulo + '\'' +
+                ", acronimo='" + acronimo + '\'' +
+                ", issn=" + issn +
+                '}';
     }
 }

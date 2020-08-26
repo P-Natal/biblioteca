@@ -1,10 +1,12 @@
 package com.natal.biblioteca.infrastructure.repository;
 
+import com.natal.biblioteca.controller.model.Livro;
 import com.natal.biblioteca.infrastructure.entities.LivroEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.List;
 
 public class LivroRepository {
@@ -45,5 +47,11 @@ public class LivroRepository {
         this.entityManager.getTransaction().begin();
         this.entityManager.remove(livroEntity);
         this.entityManager.getTransaction().commit();
+    }
+
+    public List<LivroEntity> getLivroPorAutor(Long autor_id) {
+        Query query = entityManager.createNamedQuery("buscarLivroPorAutor");
+        query.setParameter("autor_id", autor_id);
+        return query.getResultList();
     }
 }

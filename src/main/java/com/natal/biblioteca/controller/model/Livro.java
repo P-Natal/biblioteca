@@ -3,7 +3,7 @@ package com.natal.biblioteca.controller.model;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Livro {
+public class Livro extends Publicacao{
 
     private Long id;
 
@@ -11,9 +11,19 @@ public class Livro {
 
     private int isbn;
 
-    public Livro(Long id, Editora editoraEntity, int isbn) {
+    public Livro() {
+    }
+
+    public Livro(Long id, String titulo, String data_publicacao, boolean acesso_livre, int doi, Autor autor, Editora editora, int isbn) {
+        super(titulo, data_publicacao, acesso_livre, doi, autor);
         this.id = id;
-        this.editora = editoraEntity;
+        this.editora = editora;
+        this.isbn = isbn;
+    }
+
+    public Livro(String titulo, String data_publicacao, boolean acesso_livre, int doi, Autor autor, Editora editora, int isbn) {
+        super(titulo, data_publicacao, acesso_livre, doi, autor);
+        this.editora = editora;
         this.isbn = isbn;
     }
 

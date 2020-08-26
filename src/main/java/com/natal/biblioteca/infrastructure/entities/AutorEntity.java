@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "autor")
 @NamedQueries({
     @NamedQuery(name = "buscaTodosAutor", query = "select a from AutorEntity a"),
     @NamedQuery(name = "buscarAutoresPorPrimeiroNome" , query = "select a from AutorEntity a where primeiro_nome = :primNome"),
@@ -33,8 +34,8 @@ public class AutorEntity {
     @Column(name = "pais")
     private String pais;
 
-    @OneToMany(mappedBy = "autor", fetch = FetchType.LAZY)
-    private List<PublicacaoAutorEntity> publicacaoAutorEntity;
+//    @OneToMany(mappedBy = "autor", fetch = FetchType.LAZY)
+//    private List<PublicacaoEntity> publicacoes;
 
     public AutorEntity() {
     }
@@ -76,9 +77,9 @@ public class AutorEntity {
         return pais;
     }
 
-    public List<PublicacaoAutorEntity> getPublicacaoAutorEntity() {
-        return publicacaoAutorEntity;
-    }
+//    public List<PublicacaoEntity> getPublicacoes() {
+//        return publicacoes;
+//    }
 
     @Override
     public String toString() {

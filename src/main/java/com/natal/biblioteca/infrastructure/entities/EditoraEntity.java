@@ -3,6 +3,7 @@ package com.natal.biblioteca.infrastructure.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "editora")
 @NamedQuery(name = "buscaTodosEditora", query = "select e from EditoraEntity e")
 public class EditoraEntity {
 
@@ -16,7 +17,16 @@ public class EditoraEntity {
     @Column(name = "pais")
     private String pais;
 
+    public EditoraEntity() {
+    }
+
     public EditoraEntity(String nome, String pais) {
+        this.nome = nome;
+        this.pais = pais;
+    }
+
+    public EditoraEntity(Long id, String nome, String pais) {
+        this.id = id;
         this.nome = nome;
         this.pais = pais;
     }

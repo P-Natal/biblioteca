@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "conferencia")
 @NamedQuery(name = "buscaTodosConferencia", query = "select c from ConferenciaEntity c")
 public class ConferenciaEntity {
 
@@ -32,7 +33,21 @@ public class ConferenciaEntity {
     @Column(name = "data_fim")
     private Date data_fim;
 
+    public ConferenciaEntity() {
+    }
+
     public ConferenciaEntity(String nome, String acronimo, int edicao, String cidade, String pais, Date data_inicio, Date data_fim) {
+        this.nome = nome;
+        this.acronimo = acronimo;
+        this.edicao = edicao;
+        this.cidade = cidade;
+        this.pais = pais;
+        this.data_inicio = data_inicio;
+        this.data_fim = data_fim;
+    }
+
+    public ConferenciaEntity(Long id, String nome, String acronimo, int edicao, String cidade, String pais, Date data_inicio, Date data_fim) {
+        this.id = id;
         this.nome = nome;
         this.acronimo = acronimo;
         this.edicao = edicao;
@@ -104,5 +119,19 @@ public class ConferenciaEntity {
 
     public void setData_fim(Date data_fim) {
         this.data_fim = data_fim;
+    }
+
+    @Override
+    public String toString() {
+        return "ConferenciaEntity{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", acronimo='" + acronimo + '\'' +
+                ", edicao=" + edicao +
+                ", cidade='" + cidade + '\'' +
+                ", pais='" + pais + '\'' +
+                ", data_inicio=" + data_inicio +
+                ", data_fim=" + data_fim +
+                '}';
     }
 }

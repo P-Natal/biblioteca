@@ -1,10 +1,13 @@
 package com.natal.biblioteca.infrastructure.repository;
 
+import com.natal.biblioteca.controller.model.ArtigoDeConferencia;
 import com.natal.biblioteca.infrastructure.entities.ArtigoDeConferenciaEntity;
+import com.natal.biblioteca.infrastructure.entities.ArtigoDePeriodicoEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.List;
 
 public class ArtigoDeConferenciaRepository {
@@ -45,5 +48,11 @@ public class ArtigoDeConferenciaRepository {
         this.entityManager.getTransaction().begin();
         this.entityManager.remove(artigo);
         this.entityManager.getTransaction().commit();
+    }
+
+    public List<ArtigoDeConferenciaEntity> getArtigoPorAutor(Long autor_id) {
+        Query query = entityManager.createNamedQuery("buscarArtConfPorAutor");
+        query.setParameter("autor_id", autor_id);
+        return query.getResultList();
     }
 }

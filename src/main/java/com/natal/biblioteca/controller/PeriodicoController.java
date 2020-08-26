@@ -47,8 +47,8 @@ public class PeriodicoController {
     @GET
     @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
-    public Periodico buscaPeriodico(Long id){
+    @Path("/buscar")
+    public Periodico buscaPeriodico(@PathParam("id") Long id){
         PeriodicoEntity entity = repository.getPeriodico(id);
 
         return new Periodico(
@@ -71,24 +71,22 @@ public class PeriodicoController {
     public String cadastrar(Periodico periodico){
         PeriodicoEntity entity;
         try {
-
             EditoraEntity editoraEntity = editoraRepository.getEditora(periodico.getEditora().getId());
 
-            if (editoraEntity == null){
-                editoraEntity = new EditoraEntity(
-                        periodico.getEditora().getNome(),
-                        periodico.getEditora().getPais()
+            if (editoraEntity != null){
+                entity = new PeriodicoEntity(
+                        editoraEntity,
+                        periodico.getTitulo(),
+                        periodico.getAcronimo(),
+                        periodico.getIssn()
                 );
+                repository.salvar(entity);
+                return "Registro cadastrado com sucesso!";
+            }
+            else {
+                throw new NullPointerException("Editora nao pode ser nula!");
             }
 
-            entity = new PeriodicoEntity(
-                    editoraEntity,
-                    periodico.getTitulo(),
-                    periodico.getAcronimo(),
-                    periodico.getIssn()
-            );
-            repository.salvar(entity);
-            return "Registro cadastrado com sucesso!";
         } catch (Exception e) {
             return "Erro ao cadastrar um registro " + e.getMessage();
         }

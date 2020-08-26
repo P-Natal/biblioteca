@@ -5,6 +5,7 @@ import com.natal.biblioteca.infrastructure.entities.ArtigoDePeriodicoEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.List;
 
 public class ArtigoDePeriodicoRepository {
@@ -45,5 +46,11 @@ public class ArtigoDePeriodicoRepository {
         this.entityManager.getTransaction().begin();
         this.entityManager.remove(artigo);
         this.entityManager.getTransaction().commit();
+    }
+
+    public List<ArtigoDePeriodicoEntity> getArtigoPorAutor(Long autor_id) {
+        Query query = entityManager.createNamedQuery("buscarArtPeriodPorAutor");
+        query.setParameter("autor_id", autor_id);
+        return query.getResultList();
     }
 }

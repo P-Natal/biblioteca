@@ -5,7 +5,9 @@ import com.natal.biblioteca.infrastructure.entities.ConferenciaEntity;
 import com.natal.biblioteca.infrastructure.repository.ConferenciaRepository;
 
 import javax.ws.rs.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Path("/conferencia-controller")
@@ -15,7 +17,7 @@ public class ConferenciaController {
 
     @GET
     @Produces("application/json; charset=UTF-8")
-    @Path("/busca-conferenciaes")
+    @Path("/busca-conferencias")
     public List<Conferencia> todosConferenciaes(){
 
         List<Conferencia> conferenciaes =  new ArrayList<Conferencia>();
@@ -30,8 +32,8 @@ public class ConferenciaController {
                     entity.getEdicao(),
                     entity.getCidade(),
                     entity.getPais(),
-                    entity.getData_inicio(),
-                    entity.getData_fim()
+                    String.valueOf(entity.getData_inicio()),
+                    String.valueOf(entity.getData_fim())
             ));
         }
         return conferenciaes;
@@ -50,8 +52,8 @@ public class ConferenciaController {
                 entity.getEdicao(),
                 entity.getCidade(),
                 entity.getPais(),
-                entity.getData_inicio(),
-                entity.getData_fim()
+                String.valueOf(entity.getData_inicio()),
+                String.valueOf(entity.getData_fim())
         );
     }
 
@@ -62,14 +64,19 @@ public class ConferenciaController {
     public String cadastrar(Conferencia conferencia){
         ConferenciaEntity entity;
         try {
+
+            Date data_inicio_conferencia = new SimpleDateFormat("dd-MM-yyyy").parse(conferencia.getData_inicio());
+            Date data_fim_conferencia = new SimpleDateFormat("dd-MM-yyyy").parse(conferencia.getData_fim());
+
+
             entity = new ConferenciaEntity(
                     conferencia.getNome(),
                     conferencia.getAcronimo(),
                     conferencia.getEdicao(),
                     conferencia.getCidade(),
                     conferencia.getPais(),
-                    conferencia.getData_inicio(),
-                    conferencia.getData_fim()
+                    data_inicio_conferencia,
+                    data_fim_conferencia
             );
             repository.salvar(entity);
             return "Registro cadastrado com sucesso!";

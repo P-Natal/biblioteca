@@ -2,41 +2,43 @@ package com.natal.biblioteca.controller.model;
 
 import com.natal.biblioteca.infrastructure.entities.auxiliar.TipoArtigo;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class ArtigoDeConferencia {
+public class ArtigoDeConferencia extends Publicacao{
 
-    private Long Id;
-
-    private Conferencia conferenciaEntity;
+    private Conferencia conferencia;
 
     private TipoArtigo tipo;
 
     public ArtigoDeConferencia() {
     }
 
-    public ArtigoDeConferencia(Long id, Conferencia conferenciaEntity, TipoArtigo tipo) {
-        Id = id;
-        this.conferenciaEntity = conferenciaEntity;
+    public ArtigoDeConferencia(Long id, Conferencia conferencia, TipoArtigo tipo) {
+        this.setId(id);
+        this.conferencia = conferencia;
         this.tipo = tipo;
     }
 
-    public Long getId() {
-        return Id;
+    public ArtigoDeConferencia(String titulo, String data_publicacao, boolean acesso_livre, int doi, Autor autor, Conferencia conferencia, TipoArtigo tipo) {
+        super(titulo, data_publicacao, acesso_livre, doi, autor);
+        this.conferencia = conferencia;
+        this.tipo = tipo;
     }
 
-    public void setId(Long id) {
-        Id = id;
+    public ArtigoDeConferencia(Long id, String titulo, String data_publicacao, boolean acesso_livre, int doi, Autor autor, Conferencia conferencia, TipoArtigo tipo) {
+        super(titulo, data_publicacao, acesso_livre, doi, autor);
+        this.setId(id);
+        this.conferencia = conferencia;
+        this.tipo = tipo;
     }
 
-    public Conferencia getConferenciaEntity() {
-        return conferenciaEntity;
+    public Conferencia getConferencia() {
+        return conferencia;
     }
 
-    public void setConferenciaEntity(Conferencia conferenciaEntity) {
-        this.conferenciaEntity = conferenciaEntity;
+    public void setConferencia(Conferencia conferencia) {
+        this.conferencia = conferencia;
     }
 
     public TipoArtigo getTipo() {
@@ -45,5 +47,13 @@ public class ArtigoDeConferencia {
 
     public void setTipo(TipoArtigo tipo) {
         this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "ArtigoDeConferencia{" +
+                "conferencia=" + conferencia +
+                ", tipo=" + tipo +
+                '}';
     }
 }

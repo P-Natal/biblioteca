@@ -1,8 +1,5 @@
 package com.natal.biblioteca.controller.model;
 
-import javax.persistence.*;
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -20,12 +17,25 @@ public class Conferencia {
 
     private String pais;
 
-    private Date data_inicio;
+    private String data_inicio;
 
-    private Date data_fim;
+    private String data_fim;
 
-    public Conferencia(Long id, String nome, String acronimo, int edicao, String cidade, String pais, Date data_inicio, Date data_fim) {
+    public Conferencia() {
+    }
+
+    public Conferencia(Long id, String nome, String acronimo, int edicao, String cidade, String pais, String data_inicio, String data_fim) {
         this.id = id;
+        this.nome = nome;
+        this.acronimo = acronimo;
+        this.edicao = edicao;
+        this.cidade = cidade;
+        this.pais = pais;
+        this.data_inicio = data_inicio;
+        this.data_fim = data_fim;
+    }
+
+    public Conferencia(String nome, String acronimo, int edicao, String cidade, String pais, String data_inicio, String data_fim) {
         this.nome = nome;
         this.acronimo = acronimo;
         this.edicao = edicao;
@@ -83,19 +93,19 @@ public class Conferencia {
         this.pais = pais;
     }
 
-    public Date getData_inicio() {
+    public String getData_inicio() {
         return data_inicio;
     }
 
-    public void setData_inicio(Date data_inicio) {
+    public void setData_inicio(String data_inicio) {
         this.data_inicio = data_inicio;
     }
 
-    public Date getData_fim() {
+    public String getData_fim() {
         return data_fim;
     }
 
-    public void setData_fim(Date data_fim) {
+    public void setData_fim(String data_fim) {
         this.data_fim = data_fim;
     }
 }

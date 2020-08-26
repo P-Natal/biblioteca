@@ -3,6 +3,7 @@ package com.natal.biblioteca.infrastructure.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "capitulo")
 @NamedQuery(name = "buscaTodosCapitulos", query = "select cap from CapituloEntity cap")
 public class CapituloEntity {
 
@@ -12,6 +13,9 @@ public class CapituloEntity {
 
     @ManyToOne(targetEntity = LivroEntity.class)
     private LivroEntity livro;
+
+    public CapituloEntity() {
+    }
 
     public CapituloEntity(LivroEntity livroEntity) {
         this.livro = livroEntity;

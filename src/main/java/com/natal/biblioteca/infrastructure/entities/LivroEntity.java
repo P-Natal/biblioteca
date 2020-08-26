@@ -1,15 +1,16 @@
 package com.natal.biblioteca.infrastructure.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = "buscaTodosLivro", query = "select l from LivroEntity l")
-public class LivroEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+@Table(name = "livro")
+@NamedQueries({
+        @NamedQuery(name = "buscaTodosLivro", query = "select l from LivroEntity l"),
+        @NamedQuery(name = "buscarLivroPorAutor", query = "select l from LivroEntity l join l.autor a where a.id = :autor_id")
+})
+public class LivroEntity extends PublicacaoEntity{
 
     @ManyToOne
     private EditoraEntity editora;
@@ -20,23 +21,21 @@ public class LivroEntity {
     @OneToMany(mappedBy = "livro")
     private List<CapituloEntity> capituloEntities;
 
-    public LivroEntity(EditoraEntity editoraEntity, int isbn, List<CapituloEntity> capituloEntities) {
+    public LivroEntity() {
+        super();
+    }
+
+    public LivroEntity(String titulo, Date data_publicacao, boolean acesso_livre, int doi, AutorEntity autorEntity, EditoraEntity editoraEntity, int isbn, List<CapituloEntity> capituloEntities) {
+        super(titulo, data_publicacao, acesso_livre, doi, autorEntity);
         this.editora = editoraEntity;
         this.isbn = isbn;
         this.capituloEntities = capituloEntities;
     }
 
-    public LivroEntity(EditoraEntity editoraEntity, int isbn) {
+    public LivroEntity(String titulo, Date data_publicacao, boolean acesso_livre, int doi, AutorEntity autorEntity, EditoraEntity editoraEntity, int isbn) {
+        super(titulo, data_publicacao, acesso_livre, doi, autorEntity);
         this.editora = editoraEntity;
         this.isbn = isbn;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public EditoraEntity getEditora() {

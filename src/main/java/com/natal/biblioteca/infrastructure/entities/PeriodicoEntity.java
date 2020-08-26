@@ -3,6 +3,7 @@ package com.natal.biblioteca.infrastructure.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "periodico")
 @NamedQuery(name = "buscaTodosPeriodico", query = "select p from PeriodicoEntity p")
 public class PeriodicoEntity {
 
@@ -10,7 +11,7 @@ public class PeriodicoEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne(targetEntity = EditoraEntity.class)
+    @ManyToOne
     private EditoraEntity editora;
 
     @Column(name = "titulo")
@@ -21,6 +22,9 @@ public class PeriodicoEntity {
 
     @Column(name = "issn")
     private int issn;
+
+    public PeriodicoEntity() {
+    }
 
     public PeriodicoEntity(EditoraEntity editoraEntity, String titulo, String acronimo, int issn) {
         this.editora = editoraEntity;

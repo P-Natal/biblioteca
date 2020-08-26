@@ -19,7 +19,6 @@ public class EditoraController {
     public List<Editora> todosEditoraes(){
 
         List<Editora> editoras =  new ArrayList<Editora>();
-
         List<EditoraEntity> listaEditoraEntity = repository.buscaTodos();
 
         for (EditoraEntity entity : listaEditoraEntity) {
@@ -37,8 +36,8 @@ public class EditoraController {
     @GET
     @Consumes("application/json; charset=UTF-8")
     @Produces("application/json; charset=UTF-8")
-    @Path("/deletar")
-    public Editora buscaEditora(Long id){
+    @Path("/buscar/{id}")
+    public Editora buscaEditora(@PathParam("id") Long id){
         EditoraEntity entity = repository.getEditora(id);
         return new Editora(
                 entity.getId(),
