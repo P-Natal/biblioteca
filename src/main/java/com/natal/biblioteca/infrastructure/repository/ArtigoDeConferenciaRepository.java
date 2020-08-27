@@ -50,9 +50,9 @@ public class ArtigoDeConferenciaRepository {
         this.entityManager.getTransaction().commit();
     }
 
-    public List<ArtigoDeConferenciaEntity> getArtigoPorAutor(Long autor_id) {
+    public List<ArtigoDeConferenciaEntity> getArtigoPorAutor(String primNome) {
         Query query = entityManager.createNamedQuery("buscarArtConfPorAutor");
-        query.setParameter("autor_id", autor_id);
+        query.setParameter("primNome", primNome);
         return query.getResultList();
     }
 }

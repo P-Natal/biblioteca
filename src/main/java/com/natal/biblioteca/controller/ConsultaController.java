@@ -28,12 +28,12 @@ public class ConsultaController {
     @GET
     @Produces("application/json; charset=UTF-8")
     @Path("/{autor_id}/publicacoes")
-    public List<ConsultaResponseTO> todasPublicacoes(@PathParam("autor_id") Long autor_id){
+    public List<ConsultaResponseTO> todasPublicacoes(@PathParam("autor_id") String primNome){
         List<ConsultaResponseTO> consultaResponse = new ArrayList<ConsultaResponseTO>();
 
-        List<LivroEntity> livroEntities = livroRepository.getLivroPorAutor(autor_id);
-        List<ArtigoDePeriodicoEntity> artigosPeriod = artigoDePeriodicoRepository.getArtigoPorAutor(autor_id);
-        List<ArtigoDeConferenciaEntity> artigosConf = artigoDeConferenciaRepository.getArtigoPorAutor(autor_id);
+        List<LivroEntity> livroEntities = livroRepository.getLivroPorAutor(primNome);
+        List<ArtigoDePeriodicoEntity> artigosPeriod = artigoDePeriodicoRepository.getArtigoPorAutor(primNome);
+        List<ArtigoDeConferenciaEntity> artigosConf = artigoDeConferenciaRepository.getArtigoPorAutor(primNome);
 
         for (LivroEntity entity : livroEntities){
             consultaResponse.add(
@@ -69,12 +69,12 @@ public class ConsultaController {
     @GET
     @Produces("application/json; charset=UTF-8")
     @Path("/{autor_id}/publicacoes/{tipo}")
-    public List<ConsultaResponseTO> todosAutores(@PathParam("autor_id") Long autor_id, @PathParam("tipo") String tipo){
+    public List<ConsultaResponseTO> todosAutores(@PathParam("autor_id") String primNome, @PathParam("tipo") String tipo){
         List<ConsultaResponseTO> consultaResponse = new ArrayList<ConsultaResponseTO>();
 
-        List<LivroEntity> livroEntities = livroRepository.getLivroPorAutor(autor_id);
-        List<ArtigoDePeriodicoEntity> artigosPeriod = artigoDePeriodicoRepository.getArtigoPorAutor(autor_id);
-        List<ArtigoDeConferenciaEntity> artigosConf = artigoDeConferenciaRepository.getArtigoPorAutor(autor_id);
+        List<LivroEntity> livroEntities = livroRepository.getLivroPorAutor(primNome);
+        List<ArtigoDePeriodicoEntity> artigosPeriod = artigoDePeriodicoRepository.getArtigoPorAutor(primNome);
+        List<ArtigoDeConferenciaEntity> artigosConf = artigoDeConferenciaRepository.getArtigoPorAutor(primNome);
 
         if (tipo.equals("livro")){
             for (LivroEntity entity : livroEntities){

@@ -49,9 +49,9 @@ public class LivroRepository {
         this.entityManager.getTransaction().commit();
     }
 
-    public List<LivroEntity> getLivroPorAutor(Long autor_id) {
+    public List<LivroEntity> getLivroPorAutor(String primNome) {
         Query query = entityManager.createNamedQuery("buscarLivroPorAutor");
-        query.setParameter("autor_id", autor_id);
+        query.setParameter("primNome", primNome);
         return query.getResultList();
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "livro")
 @NamedQueries({
         @NamedQuery(name = "buscaTodosLivro", query = "select l from LivroEntity l"),
-        @NamedQuery(name = "buscarLivroPorAutor", query = "select l from LivroEntity l join l.autor a where a.id = :autor_id")
+        @NamedQuery(name = "buscarLivroPorAutor", query = "select l from LivroEntity l join l.autor a where a.primeiro_nome = :primNome")
 })
 public class LivroEntity extends PublicacaoEntity{
 

@@ -48,9 +48,9 @@ public class ArtigoDePeriodicoRepository {
         this.entityManager.getTransaction().commit();
     }
 
-    public List<ArtigoDePeriodicoEntity> getArtigoPorAutor(Long autor_id) {
+    public List<ArtigoDePeriodicoEntity> getArtigoPorAutor(String primNome) {
         Query query = entityManager.createNamedQuery("buscarArtPeriodPorAutor");
-        query.setParameter("autor_id", autor_id);
+        query.setParameter("primNome", primNome);
         return query.getResultList();
     }
 }

@@ -7,7 +7,7 @@ import java.util.Date;
 @Table(name = "artigo_de_periodico")
 @NamedQueries({
         @NamedQuery(name = "buscaTodosArtigoDePeriodico", query = "select art from ArtigoDePeriodicoEntity art"),
-        @NamedQuery(name = "buscarArtPeriodPorAutor", query = "select art from ArtigoDePeriodicoEntity art join art.autor a where a.id = :autor_id")
+        @NamedQuery(name = "buscarArtPeriodPorAutor", query = "select art from ArtigoDePeriodicoEntity art join art.autor a where a.primeiro_nome = :primNome")
 })
 public class ArtigoDePeriodicoEntity extends PublicacaoEntity{
 
